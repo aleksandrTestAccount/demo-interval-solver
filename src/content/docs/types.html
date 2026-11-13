@@ -1,0 +1,47 @@
+<p class="chunk-paragraph">Supported types: only booleans and numbers.</p>
+
+<pre data-lang="e0">
+//a,b,c - boolean type vars
+a == true
+b == false
+1 > 2 == c 
+size 4 0
+//result: {a: true, b: false, c: false}
+</pre>
+
+<pre data-lang="e0">
+c == true
+1 > 2 == c 
+size 4 0
+//result: false
+</pre>
+
+<p class="chunk-paragraph">
+  Numbers can be represented in binary, hexadecimal, octal, and decimal formats:
+</p>
+
+<pre data-lang="e0">
+a1 = 0b101.1 // 5.5 in decimal
+a2 = 0xB.A   // 11.625 in decimal
+a3 = 0o13.3  // 11.375 in decimal
+a4 = 0d12.34 // 12.34 in decimal (precision loss due to binary conversion)
+</pre>
+
+<p class="chunk-paragraph">Note on leading zeros:</p>
+
+<pre data-lang="e0">
+/*
+    leading zeros:
+    001 = x    // error
+    0b001 = x  // ok
+    05 = x     // error
+    0d05 = x   // ok
+*/
+</pre>
+
+<p class="chunk-paragraph">
+  Data types are inferred by operators. For example, all variables in arithmetic equations (such as
+  <code>a + b = r</code>) are numbers, while variables in boolean equations (such as
+  <code>x1 || x2 == x3</code>) are booleans. The <code>==</code> operator acts as the equality
+  operator for the boolean type.
+</p>

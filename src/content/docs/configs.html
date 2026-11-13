@@ -1,0 +1,52 @@
+<p class="chunk-paragraph">
+  Engine configuration parameters allow you to fine-tune compilation limits, execution flags, and
+  variable strictness.
+</p>
+
+<p class="chunk-paragraph">
+  For example, you can handle large numbers by increasing the size, or bypass the solving stage
+  entirely to just validate the code structure:
+</p>
+
+<pre data-lang="e0">
+size 101 0
+
+a * b = 1267650600228229401496703205376
+
+a < 2 ** 50
+
+// Check if code is valid without solving
+config solve false
+</pre>
+
+<p class="chunk-paragraph">
+  Enabling <code>strict</code> mode throws immediate errors for variables that are not explicitly
+  typed beforehand:
+</p>
+
+<pre data-lang="e0">
+config strict true
+
+// error
+x > y == b
+</pre>
+
+<p class="chunk-paragraph">
+  To pass strict mode, encapsulate variable names inside <code>numbers</code> or
+  <code>booleans</code> declaration blocks:
+</p>
+
+<pre data-lang="e0">
+config strict true
+
+numbers {
+    x, y,
+}
+
+booleans {
+    b,
+}
+
+// ok
+x > y == b
+</pre>

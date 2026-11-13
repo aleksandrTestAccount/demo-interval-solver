@@ -1,0 +1,162 @@
+<p class="chunk-paragraph">
+  Advanced use cases including cryptographic hashing, bit settings, and Karp's NP-complete problems
+  modeled in E0.
+</p>
+
+<pre data-lang="e0">
+// HELLO
+// hash function:
+/* 
+    function f(arr) {
+        let h = 5381; 
+        let mod = 2 ** 32;
+
+        for (let symbol of arr) {
+            h = (h * 33 + symbol) % mod;
+        }
+
+        return h
+    }
+*/ 
+
+// hash function input: 5 letters, uppercase
+// hash function output: 222103545
+
+symbol1 >= 65; symbol1 <= 90;
+symbol2 >= 65; symbol2 <= 90;
+symbol3 >= 65; symbol3 <= 90;
+symbol4 >= 65; symbol4 <= 90;
+symbol5 >= 65; symbol5 <= 90;
+
+h1 = 5381
+
+(h1 {<<} 5) {+} h1 {+} symbol1 = h2
+(h2 {<<} 5) {+} h2 {+} symbol2 = h3
+(h3 {<<} 5) {+} h3 {+} symbol3 = h4
+(h4 {<<} 5) {+} h4 {+} symbol4 = h5
+(h5 {<<} 5) {+} h5 {+} symbol5 = 222103545
+
+size + 32 0
+
+</pre>
+
+<pre data-lang="e0">
+// Bit Settings
+// The least significant bit (LSB) is bit 0 (e.g., x:0).
+// The most significant bit (MSB) represents the sign bit.
+
+a * b = 247
+a != 1 
+
+// Since 247 = 3 (mod 4), the following constraints can be applied:
+a:0 == true  // a is odd; LSB is 1
+a:1 == false // a = 1 (mod 4); bit 1 is 0
+
+b:0 == true  // b is odd; LSB is 1
+b:1 == true  // b = 3 (mod 4); bit 1 is 1
+
+a:8 == false // a is positive
+b:8 == false // b is positive
+
+size 8 0
+</pre>
+
+<pre data-lang="e0">
+// Primality checks (no result or result is false indicates 97 is prime)
+a * b = 97
+a > 1
+b > 1
+size 8 0
+</pre>
+
+<pre data-lang="e0">
+// Intersection of sets (bit vector representation) 
+// u = -1; universal set {1,2,3,4,5} 0b11111
+a = 7  // {1,2,3}  0b00111
+b = 14 // {2,3,4} 0b01110
+
+r = a & b // {2,3} 0b00110
+
+size 4 0 
+</pre>
+
+<pre data-lang="e0">
+// Karp's problem 1. Satisfiability 
+// (x1 || !x2 || x3) && (x1 || x2 || x4) &&  (!x1 || !x2 || x5) 
+clause( x1, !x2, x3)
+clause( x1,  x2, x4)
+clause(!x1, !x2, x5)
+</pre>
+
+<pre data-lang="e0">
+// Karp's problem 2. 0-1 Integer Programming
+y = (40 *? x1) + (8 *? x2) + (50 *? x3) + (16 *? x4)
+
+1100 >= (380 *? x1) + (200 *? x2) + (350 *? x3) + (800 *? x4)
+
+binarySearch max y 0 500
+
+size 11 0
+</pre>
+
+<pre data-lang="e0">
+// Karp's problem 3. Clique 
+/* Matrix:
+0 1 1 1 0 1 0
+1 0 1 0 1 0 1
+1 1 0 1 1 0 0 
+1 0 1 0 1 1 1
+0 1 1 1 0 1 1
+1 0 0 1 1 0 1
+0 1 0 1 1 1 0
+*/
+
+// k = 4 
+4 = sumBool(v1, v2, v3, v4, v5, v6, v7)
+
+// Each missing edge represents an additional constraint
+v1 && v5 == false
+v1 && v7 == false
+
+v2 && v4 == false
+v2 && v6 == false
+
+v3 && v6 == false
+v3 && v7 == false
+
+size 4 0
+</pre>
+
+<pre data-lang="e0">
+// Karp's problem 4. Set packing 
+/* Sets:
+u : {1,2,3,4,5,6,7,8}
+a : {1,2,3} 
+b : {4,5,6} 
+c : {1,4,7} 
+d : {2,5,8} 
+e : {3,6,8} 
+f : {7,8} 
+*/
+
+// k = 3 
+3 = sumBool(a, b, c, d, e, f);
+
+// Each intersection of sets introduces an additional constraint.
+a && c == false
+a && d == false
+a && e == false
+
+b && c == false
+b && d == false
+b && e == false
+
+c && f == false
+
+d && e == false
+d && f == false
+
+e && f == false
+
+size 4 0
+</pre>

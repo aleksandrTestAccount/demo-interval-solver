@@ -1,0 +1,35 @@
+<p class="chunk-paragraph">
+  An optimization routine modeling Constant Multiplication routines. The engine constructs a fast
+  multiplication sequence for a multiplier of <code>43</code> using exactly 3 cumulative additions
+  combined with binary shifts.
+</p>
+
+<pre data-lang="e0">
+size + 6 0
+
+n = 43
+
+// 1
+1 &lt;&lt; x1_1 = s1_1
+1 &lt;&lt; x1_2 = s1_2
+
+s1_1 + s1_2 = r1
+
+// 2
+t2_1 = from( 1, r1)
+t2_2 = from( 1, r1)
+
+t2_1 &lt;&lt; x2_1 = s2_1
+t2_2 &lt;&lt; x2_2 = s2_2
+
+s2_1 + s2_2 = r2
+
+// 3
+t3_1 = from( 1, r1, r2)
+t3_2 = from( 1, r1, r2)
+
+t3_1 &lt;&lt; x3_1 = s3_1
+t3_2 &lt;&lt; x3_2 = s3_2
+
+s3_1 + s3_2 = n
+</pre>

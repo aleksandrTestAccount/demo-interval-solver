@@ -1,0 +1,58 @@
+<p class="chunk-paragraph">
+  Weighted Partial MaxSAT problem where some hard clauses must be strictly satisfied while soft
+  clauses carry varying weights to maximize.
+</p>
+
+<pre data-lang="e0">
+// clause             : weight
+
+//  x0 ||  x1         : 1
+//  x0 || !x1         : must be satisfied
+// !x0 ||  x1 ||  x2  : 2
+// !x0 || !x1 || !x2  : must be satisfied
+// !x1 || !x2         : 3
+//  x0 || !x2         : 1
+// !x0 ||  x1 || !x2  : 1
+//  x0 ||  x1 ||  x2  : 2
+// !x0 ||  x1         : 2
+// !x0 || !x1         : 3
+
+ x0 ||  x1         == b0;  b0 ? 1 : 0 = v0
+ x0 || !x1         == true 
+!x0 ||  x1 ||  x2  == b2;  b2 ? 2 : 0 = v2
+!x0 || !x1 || !x2  == true
+!x1 || !x2         == b4;  b4 ? 3 : 0 = v4
+ x0 || !x2         == b5;  b5 ? 1 : 0 = v5
+!x0 ||  x1 || !x2  == b6;  b6 ? 1 : 0 = v6
+ x0 ||  x1 ||  x2  == b7;  b7 ? 2 : 0 = v7
+!x0 ||  x1         == b8;  b8 ? 2 : 0 = v8
+!x0 || !x1         == b9;  b9 ? 3 : 0 = v9
+
+v = v0 + v2 + v4 + v5 + v6 + v7 + v8 + v9
+
+binarySearch max v 0 15
+
+size 5 0
+
+
+/* Alternatively (equivalent):
+
+ x0 || !x1 
+!x0 || !x1 || !x2
+
+v0 = 1 *? ( x0 ||  x1)
+v2 = 2 *? (!x0 ||  x1 ||  x2)
+v4 = 3 *? (!x1 || !x2)
+v5 = 1 *? ( x0 || !x2)
+v6 = 1 *? (!x0 ||  x1 || !x2)
+v7 = 2 *? ( x0 ||  x1 ||  x2)
+v8 = 2 *? (!x0 ||  x1)
+v9 = 3 *? (!x0 || !x1)
+
+v = v0 + v2 + v4 + v5 + v6 + v7 + v8 + v9
+
+binarySearch max v 0 15
+
+size 5 0
+*/
+</pre>

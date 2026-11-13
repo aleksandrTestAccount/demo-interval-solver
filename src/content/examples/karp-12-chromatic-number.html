@@ -1,0 +1,48 @@
+<p class="chunk-paragraph">
+  Karp's 12th NP-complete problem: Chromatic Number (Graph Coloring). Evaluates graph node variables
+  using the complex structural architecture of a classic Petersen Graph, optimizing for the absolute
+  minimum number of vertex color fills <code>k</code> such that adjacent vertices never share an
+  intersecting color.
+</p>
+
+<pre data-lang="e0">
+//let's use the Petersen graph:
+//vertices of the inner pentagon: v1, v2, v3, v4, v5
+//vertices of the outer pentagon: w1, w2, w3, w4, w5
+
+k >= 0
+
+v1 >= 0 && v1 < k
+v2 >= 0 && v2 < k
+v3 >= 0 && v3 < k
+v4 >= 0 && v4 < k
+v5 >= 0 && v5 < k
+
+w1 >= 0 && w1 < k
+w2 >= 0 && w2 < k
+w3 >= 0 && w3 < k
+w4 >= 0 && w4 < k
+w5 >= 0 && w5 < k
+
+v1 != v2
+v2 != v3
+v3 != v4
+v4 != v5
+v5 != v1
+
+w1 != w3
+w2 != w4
+w3 != w5
+w4 != w1
+w5 != w2
+
+v1 != w1
+v2 != w2
+v3 != w3
+v4 != w4
+v5 != w5
+
+binarySearch min k 0 10
+
+size 4 0
+</pre>

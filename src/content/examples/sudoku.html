@@ -1,0 +1,168 @@
+<p class="chunk-paragraph">
+  A traditional 9x9 Sudoku puzzle configured by mapping grid indexes to absolute bitmasks
+  representing powers of two, resolved under explicit row, column, and subgrid intersection rules.
+</p>
+
+<pre data-lang="e0">
+/*
+  Puzzle: 
+  
+  5 3 _  _ 7 _  _ _ _  
+  6 _ _  1 9 5  _ _ _  
+  _ 9 8  _ _ _  _ 6 _  
+
+  8 _ _  _ 6 _  _ _ 3  
+  4 _ _  8 _ 3  _ _ 1  
+  7 _ _  _ 2 _  _ _ 6  
+
+  _ 6 _  _ _ _  2 8 _  
+  _ _ _  4 1 9  _ _ 5  
+  _ _ _  _ 8 _  _ 7 9  
+*/
+
+// Values are powers of two
+v1 = 0b0000000001
+v2 = 0b0000000010
+v3 = 0b0000000100
+v4 = 0b0000001000
+v5 = 0b0000010000
+v6 = 0b0000100000
+v7 = 0b0001000000
+v8 = 0b0010000000
+v9 = 0b0100000000
+
+size + 9 0
+
+// Set values
+// Row 1 
+x00  = v5
+x01  = v3
+x02 = from(    v1, v2, v4)
+x03 = from(    v2, v6)
+x04  = v7
+x05 = from(    v2, v4, v6, v8)
+x06 = from(    v1, v4, v8, v9)
+x07 = from(    v1, v2, v4, v9)
+x08 = from(    v2, v4, v8)
+
+// Row 2 
+x10  = v6
+x11 = from(    v2, v4, v7)
+x12 = from(    v2, v4, v7)
+x13  = v1
+x14  = v9
+x15  = v5
+x16 = from(    v3, v4, v7, v8)
+x17 = from(    v2, v3, v4)
+x18 = from(    v2, v4, v7, v8)
+
+// Row 3 
+x20 = from(    v1, v2)
+x21  = v9
+x22  = v8
+x23 = from(    v2, v3)
+x24 = from(    v3, v4)
+x25 = from(    v2, v4)
+x26 = from(    v1, v3, v4, v5, v7)
+x27  = v6
+x28 = from(    v2, v4, v7)
+
+// Row 4 
+x30  = v8
+x31 = from(    v1, v2, v5)
+x32 = from(    v1, v2, v5, v9)
+x33 = from(    v5, v7, v9)
+x34  = v6
+x35 = from(    v1, v4, v7)
+x36 = from(    v4, v5, v7, v9)
+x37 = from(    v2, v4, v5, v9)
+x38  = v3
+
+// Row 5 
+x40  = v4
+x41 = from(    v2, v5)
+x42 = from(    v2, v5, v6, v9)
+x43  = v8
+x44 = from(    v5)
+x45  = v3
+x46 = from(    v5, v7, v9)
+x47 = from(    v2, v5, v9)
+x48  = v1
+
+// Row 6 
+x50  = v7
+x51 = from(    v1, v5)
+x52 = from(    v1, v3, v5, v9)
+x53 = from(    v5, v9)
+x54  = v2
+x55 = from(    v1, v4)
+x56 = from(    v4, v5, v8, v9)
+x57 = from(    v4, v5, v9)
+x58  = v6
+
+// Row 7 
+x60 = from(    v1, v3, v9)
+x61  = v6
+x62 = from(    v1, v3, v4, v5, v7, v9)
+x63 = from(    v3, v5, v7)
+x64 = from(    v3, v5)
+x65 = from(    v7)
+x66  = v2
+x67  = v8
+x68 = from(    v4)
+
+// Row 8 
+x70 = from(    v2, v3)
+x71 = from(    v2, v7, v8)
+x72 = from(    v2, v3, v7)
+x73  = v4
+x74  = v1
+x75  = v9
+x76 = from(    v3, v6)
+x77 = from(    v3)
+x78  = v5
+
+// Row 9 
+x80 = from(    v1, v2, v3)
+x81 = from(    v1, v2, v4, v5)
+x82 = from(    v1, v2, v3, v4, v5)
+x83 = from(    v2, v3, v5, v6)
+x84  = v8
+x85 = from(    v2, v6)
+x86 = from(    v1, v3, v4, v6)
+x87  = v7
+x88  = v9
+
+// Rows Constraints
+0b110101011 = x02 | x03 | x05 | x06 | x07 | x08 
+0b011001110 = x11 | x12 | x16 | x17 | x18 
+0b001011111 = x20 | x23 | x24 | x25 | x26 | x28 
+0b101011011 = x31 | x32 | x33 | x35 | x36 | x37 
+0b101110010 = x41 | x42 | x44 | x46 | x47 
+0b110011101 = x51 | x52 | x53 | x55 | x56 | x57 
+0b101011101 = x60 | x62 | x63 | x64 | x65 | x68 
+0b011100110 = x70 | x71 | x72 | x76 | x77 
+0b000111111 = x80 | x81 | x82 | x83 | x85 | x86 
+
+// Columns Constraints 
+0b100000111 = x20 | x60 | x70 | x80 
+0b011011011 = x11 | x31 | x41 | x51 | x71 | x81 
+0b101111111 = x02 | x12 | x32 | x42 | x52 | x62 | x72 | x82 
+0b101110110 = x03 | x23 | x33 | x53 | x63 | x83 
+0b000011100 = x24 | x44 | x64 
+0b011101011 = x05 | x25 | x35 | x55 | x65 | x85 
+0b111111101 = x06 | x16 | x26 | x36 | x46 | x56 | x76 | x86 
+0b100011111 = x07 | x17 | x37 | x47 | x57 | x77 
+0b011001010 = x08 | x18 | x28 | x68 
+
+// Squares Constraints 
+0b001001011 = x02 | x11 | x12 | x20 
+0b010101110 = x03 | x05 | x23 | x24 | x25 
+0b111011111 = x06 | x07 | x08 | x16 | x17 | x18 | x26 | x28 
+0b100110111 = x31 | x32 | x41 | x42 | x51 | x52 
+0b101011001 = x33 | x35 | x44 | x53 | x55 
+0b111011010 = x36 | x37 | x46 | x47 | x56 | x57 
+0b111011111 = x60 | x62 | x70 | x71 | x72 | x80 | x81 | x82 
+0b001110110 = x63 | x64 | x65 | x83 | x85 
+0b000101101 = x68 | x76 | x77 | x86
+</pre>

@@ -1,0 +1,107 @@
+:root {
+  /* Base UI palette (Clean Production Dark) */
+  --bg-main: #18181b;
+  --bg-secondary: #202024;
+  --bg-tertiary: #0f0f11;
+  --border-color: #2e2e33;
+
+  --text-main: #e4e4e7;
+  --text-muted: #71717a;
+
+  /* Code syntax palette */
+  --color-keyword: #50fa7b;
+  --color-variable: #85c8ff;
+  --color-function: #ffb5f0;
+  --color-numeric: #fca979;
+  --color-boolean: #f1fa8c;
+  --color-comment: #8d97b3;
+
+  /* Typography */
+  --font-mono: 'JetBrains Mono', 'DejaVu Sans Mono', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+/* E0 custom tokenizer classes */
+.code-comment-block-e0,
+.code-comment-line-double-slash-e0 {
+  color: var(--color-comment);
+  font-style: italic;
+}
+
+.code-keyword-control-e0 {
+  color: var(--color-keyword);
+  font-weight: bold;
+}
+
+.code-keyword-operator-e0,
+.code-punctuation-definition-bracket-e0,
+.code-punctuation-terminator-statement-e0 {
+  color: var(--color-keyword);
+}
+
+.code-constant-numeric-e0 {
+  color: var(--color-numeric);
+}
+
+.code-constant-language-boolean-e0 {
+  color: var(--color-boolean);
+}
+
+.code-variable-other-e0 {
+  color: var(--color-variable);
+}
+
+.code-support-function-e0 {
+  color: var(--color-function);
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(16, 185, 129, 0.06), transparent),
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    32px 32px,
+    32px 32px;
+  background-attachment: fixed;
+}

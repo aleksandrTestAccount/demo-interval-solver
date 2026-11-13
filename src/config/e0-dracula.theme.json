@@ -1,0 +1,50 @@
+{
+  "name": "e0-dracula",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#0f0f11",
+    "editor.foreground": "#e4e4e7"
+  },
+  "settings": [
+    {
+      "scope": "comment.line.double-slash.e0",
+      "settings": { "foreground": "#8d97b3", "fontStyle": "italic" }
+    },
+    {
+      "scope": "comment.block.e0",
+      "settings": { "foreground": "#8d97b3", "fontStyle": "italic" }
+    },
+    {
+      "scope": "keyword.control.e0",
+      "settings": { "foreground": "#50FA7B", "fontStyle": "bold" }
+    },
+    {
+      "scope": "constant.numeric.e0",
+      "settings": { "foreground": "#fca979" }
+    },
+    {
+      "scope": "constant.language.boolean.e0",
+      "settings": { "foreground": "#f1fa8c" }
+    },
+    {
+      "scope": "variable.other.e0",
+      "settings": { "foreground": "#85c8ff" }
+    },
+    {
+      "scope": "keyword.operator.e0",
+      "settings": { "foreground": "#50FA7B" }
+    },
+    {
+      "scope": "punctuation.terminator.statement.e0",
+      "settings": { "foreground": "#50FA7B" }
+    },
+    {
+      "scope": "punctuation.definition.bracket.e0",
+      "settings": { "foreground": "#50FA7B" }
+    },
+    {
+      "scope": "support.function.e0",
+      "settings": { "foreground": "#ffb5f0" }
+    }
+  ]
+}

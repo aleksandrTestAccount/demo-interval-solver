@@ -1,0 +1,42 @@
+<p class="chunk-paragraph">
+  Karp's 13th NP-complete problem: Clique Cover. Formulates a graph decomposition layout mapping
+  matrix indices to partitioned sets, checking the constraint limits where missing adjacency edge
+  links force partition divergence to cover the network using the minimal number of cliques
+  <code>k</code>.
+</p>
+
+<pre data-lang="e0">
+/* Matrix:
+0 1 1 1 0 1 0
+1 0 1 0 1 0 1
+1 1 0 1 1 0 0 
+1 0 1 0 1 1 1
+0 1 1 1 0 1 1
+1 0 0 1 1 0 1
+0 1 0 1 1 1 0
+*/
+
+k >= 0
+
+v1 >= 0 && v1 < k
+v2 >= 0 && v2 < k
+v3 >= 0 && v3 < k
+v4 >= 0 && v4 < k
+v5 >= 0 && v5 < k
+v6 >= 0 && v6 < k
+v7 >= 0 && v7 < k
+
+//Each missing edge represents an additional constraint
+v1 != v5
+v1 != v7
+
+v2 != v4
+v2 != v6
+
+v3 != v6
+v3 != v7
+
+binarySearch min k 0 10
+
+size 4 0
+</pre>

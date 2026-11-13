@@ -1,0 +1,23 @@
+<p class="chunk-paragraph">
+  SAT problem instance focused on finding a valid satisfying assignment that minimizes the total
+  number of variables evaluated to TRUE.
+</p>
+
+<pre data-lang="e0">
+ x0 ||  x1 ||  x3        
+ x0 || !x1           
+!x0 ||  x1 ||  x2  
+!x0 || !x1 || !x2  
+!x1 || !x2        
+ x0 || !x2 ||  x3        
+!x0 ||  x1 || !x2  
+ x0 ||  x1 ||  x2  
+!x0 ||  x1         
+!x0 || !x1        
+
+x = sumBool(x0, x1, x2, x3);
+
+binarySearch min x 0 4
+
+size 5 0
+</pre>

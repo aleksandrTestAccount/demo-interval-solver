@@ -1,0 +1,121 @@
+<p class="chunk-paragraph">
+  Shortest Common Supersequence (SCS) design patterns.
+  <em
+    >Note: The native interval arithmetic configuration of this solver is structurally unoptimized
+    for efficient execution of this problem scale.</em
+  >
+</p>
+
+<pre data-lang="e0">
+/* 
+size + 15 0 
+
+// string 0: C A T T C A
+// string 1: T T C G A
+
+// A: 0
+// C: 1
+// G: 2
+// T: 3
+
+s0 = 1268 // string 0 
+s1 = 984 // string 1 
+
+k >= 0; 
+//binarySearch min k 6 8 
+k = 7; 
+
+k = sumBool( k0, k1, k2, k3, k4, k5, k6, k7)
+
+//result letter 0 
+r0 = from( 0, 1, 2, 3); 
+
+n0_0 = 0 &lt;&lt;* 2; n0_0:0 == r0:0; n0_0:1 == r0:1; 
+b0_0 ? n0_0 : 0 = v0_0
+
+n1_0 = 0 &lt;&lt;* 2; n1_0:0 == r0:0; n1_0:1 == r0:1; 
+b1_0 ? n1_0 : 0 = v1_0
+
+b0_0 || b1_0 == k0
+
+//result letter 1 
+r1 = from (0, 1, 2, 3); 
+
+n0_1 = v0_0 &lt;&lt;* 2; n0_1:0 == r1:0; n0_1:1 == r1:1; 
+b0_1 ? n0_1 : v0_0 = v0_1
+
+n1_1 = v1_0 &lt;&lt;* 2; n1_1:0 == r1:0; n1_1:1 == r1:1; 
+b1_1 ? n1_1 : v1_0 = v1_1
+
+b0_1 || b1_1 == k1
+
+//result letter 2 
+r2 = from ( 0, 1, 2, 3); 
+
+n0_2 = v0_1 &lt;&lt;* 2; n0_2:0 == r2:0; n0_2:1 == r2:1; 
+b0_2 ? n0_2 : v0_1 = v0_2
+
+n1_2 = v1_1 &lt;&lt;* 2; n1_2:0 == r2:0; n1_2:1 == r2:1; 
+b1_2 ? n1_2 : v1_1 = v1_2
+
+b0_2 || b1_2 == k2
+
+//result letter 3 
+r3 = from ( 0, 1, 2, 3); 
+
+n0_3 = v0_2 &lt;&lt;* 2; n0_3:0 == r3:0; n0_3:1 == r3:1; 
+b0_3 ? n0_3 : v0_2 = v0_3
+
+n1_3 = v1_2 &lt;&lt;* 2; n1_3:0 == r3:0; n1_3:1 == r3:1; 
+b1_3 ? n1_3 : v1_2 = v1_3
+
+b0_3 || b1_3 == k3
+
+//result letter 4 
+r4 = from( 0, 1, 2, 3); 
+
+n0_4 = v0_3 &lt;&lt;* 2; n0_4:0 == r4:0; n0_4:1 == r4:1; 
+b0_4 ? n0_4 : v0_3 = v0_4
+
+n1_4 = v1_3 &lt;&lt;* 2; n1_4:0 == r4:0; n1_4:1 == r4:1; 
+b1_4 ? n1_4 : v1_3 = v1_4
+
+b0_4 || b1_4 == k4
+
+//result letter 5 
+r5 = from( 0, 1, 2, 3); 
+
+n0_5 = v0_4 &lt;&lt;* 2; n0_5:0 == r5:0; n0_5:1 == r5:1; 
+b0_5 ? n0_5 : v0_4 = v0_5
+
+n1_5 = v1_4 &lt;&lt;* 2; n1_5:0 == r5:0; n1_5:1 == r5:1; 
+b1_5 ? n1_5 : v1_4 = v1_5
+
+b0_5 || b1_5 == k5
+
+//result letter 6 
+r6 = from ( 0, 1, 2, 3); 
+
+n0_6 = v0_5 &lt;&lt;* 2; n0_6:0 == r6:0; n0_6:1 == r6:1; 
+b0_6 ? n0_6 : v0_5 = v0_6
+
+n1_6 = v1_5 &lt;&lt;* 2; n1_6:0 == r6:0; n1_6:1 == r6:1; 
+b1_6 ? n1_6 : v1_5 = v1_6
+
+b0_6 || b1_6 == k6
+
+//result letter 7 
+r7 = from( 0, 1, 2, 3); 
+
+n0_7 = v0_6 &lt;&lt;* 2; n0_7:0 == r7:0; n0_7:1 == r7:1; 
+b0_7 ? n0_7 : v0_6 = v0_7
+
+n1_7 = v1_6 &lt;&lt;* 2; n1_7:0 == r7:0; n1_7:1 == r7:1; 
+b1_7 ? n1_7 : v1_6 = v1_7
+
+b0_7 || b1_7 == k7
+
+v0_7 = s0
+v1_7 = s1
+*/
+</pre>

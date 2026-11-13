@@ -1,0 +1,37 @@
+<p class="chunk-paragraph">
+  A Golomb Ruler optimization instance targeting an 8-mark constraint configuration. The solver
+  positions ticks under explicit order conditions and maps differences ensuring all resulting
+  segment lengths are pairwise unique.
+</p>
+
+<pre data-lang="e0">
+m0 = betweenInc(0, 34);
+m1 = betweenInc(0, 34);
+m2 = betweenInc(0, 34);
+m3 = betweenInc(0, 34);
+m4 = betweenInc(0, 34);
+m5 = betweenInc(0, 34);
+m6 = betweenInc(0, 34);
+m7 = betweenInc(0, 34);
+
+m0 = 0;
+m1 > m0;
+m2 > m1;
+m3 > m2;
+m4 > m3;
+m5 > m4;
+m6 > m5;
+m7 > m6;
+
+d01 = m1 - m0; d02 = m2 - m0; d03 = m3 - m0; d04 = m4 - m0; d05 = m5 - m0; d06 = m6 - m0; d07 = m7 - m0;
+d12 = m2 - m1; d13 = m3 - m1; d14 = m4 - m1; d15 = m5 - m1; d16 = m6 - m1; d17 = m7 - m1;
+d23 = m3 - m2; d24 = m4 - m2; d25 = m5 - m2; d26 = m6 - m2; d27 = m7 - m2;
+d34 = m4 - m3; d35 = m5 - m3; d36 = m6 - m3; d37 = m7 - m3;
+d45 = m5 - m4; d46 = m6 - m4; d47 = m7 - m4;
+d56 = m6 - m5; d57 = m7 - m5;
+d67 = m7 - m6;
+
+allDifferent(d01, d02, d03, d04, d05, d06, d07, d12, d13, d14, d15, d16, d17, d23, d24, d25, d26, d27, d34, d35, d36, d37, d45, d46, d47, d56, d57, d67);
+
+d01 < d67;
+</pre>

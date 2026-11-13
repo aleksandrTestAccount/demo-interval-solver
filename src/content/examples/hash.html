@@ -1,0 +1,40 @@
+<p class="chunk-paragraph">
+  A constraint satisfaction attack or reverse-lookup simulation on a standard string hash function.
+  Given a 32-bit hash output of <code>222103545</code>, the solver reconstructs the original
+  5-character uppercase string input.
+</p>
+
+<pre data-lang="e0">
+// hash function:
+/* 
+    function f(arr) {
+        let h = 5381; 
+        let mod = 2 ** 32;
+
+        for (let symbol of arr) {
+            h = (h * 33 + symbol) % mod;
+        }
+
+        return h
+    }
+*/ 
+
+// hash function input: 5 letters, uppercase
+// hash function output: 222103545
+
+symbol1 >= 65; symbol1 <= 90;
+symbol2 >= 65; symbol2 <= 90;
+symbol3 >= 65; symbol3 <= 90;
+symbol4 >= 65; symbol4 <= 90;
+symbol5 >= 65; symbol5 <= 90;
+
+h1 = 5381
+
+(h1 {<<} 5) {+} h1 {+} symbol1 = h2
+(h2 {<<} 5) {+} h2 {+} symbol2 = h3
+(h3 {<<} 5) {+} h3 {+} symbol3 = h4
+(h4 {<<} 5) {+} h4 {+} symbol4 = h5
+(h5 {<<} 5) {+} h5 {+} symbol5 = 222103545
+
+size + 32 0
+</pre>

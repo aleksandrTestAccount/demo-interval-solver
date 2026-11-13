@@ -1,0 +1,65 @@
+<p class="chunk-paragraph">
+  The classic Eight Queens puzzle mapped onto an 8x8 chessboard constraint layout. The solver
+  assigns exact boolean states to guarantee that no two queens share the same row, column, or
+  diagonal line intersection.
+</p>
+
+<pre data-lang="e0">
+// Eight queens puzzle 
+
+size + 4 0 
+
+// Rows Constraints
+
+1 = sumBool( x00, x01, x02, x03, x04, x05, x06, x07 )
+1 = sumBool( x10, x11, x12, x13, x14, x15, x16, x17 )
+1 = sumBool( x20, x21, x22, x23, x24, x25, x26, x27 )
+1 = sumBool( x30, x31, x32, x33, x34, x35, x36, x37 )
+1 = sumBool( x40, x41, x42, x43, x44, x45, x46, x47 )
+1 = sumBool( x50, x51, x52, x53, x54, x55, x56, x57 )
+1 = sumBool( x60, x61, x62, x63, x64, x65, x66, x67 )
+1 = sumBool( x70, x71, x72, x73, x74, x75, x76, x77 )
+
+// Columns Constraints 
+
+1 = sumBool( x00, x10, x20, x30, x40, x50, x60, x70 )
+1 = sumBool( x01, x11, x21, x31, x41, x51, x61, x71 )
+1 = sumBool( x02, x12, x22, x32, x42, x52, x62, x72 )
+1 = sumBool( x03, x13, x23, x33, x43, x53, x63, x73 )
+1 = sumBool( x04, x14, x24, x34, x44, x54, x64, x74 )
+1 = sumBool( x05, x15, x25, x35, x45, x55, x65, x75 )
+1 = sumBool( x06, x16, x26, x36, x46, x56, x66, x76 )
+1 = sumBool( x07, x17, x27, x37, x47, x57, x67, x77 )
+
+// Diagonal Constraints, Top-left to Bottom-right 
+
+v01 <= 1; v01 = sumBool( x60, x71 )
+v02 <= 1; v02 = sumBool( x50, x61, x72 )
+v03 <= 1; v03 = sumBool( x40, x51, x62, x73 )
+v04 <= 1; v04 = sumBool( x30, x41, x52, x63, x74 )
+v05 <= 1; v05 = sumBool( x20, x31, x42, x53, x64, x75 )
+v06 <= 1; v06 = sumBool( x10, x21, x32, x43, x54, x65, x76 )
+v07 <= 1; v07 = sumBool( x00, x11, x22, x33, x44, x55, x66, x77 )
+v08 <= 1; v08 = sumBool( x01, x12, x23, x34, x45, x56, x67 )
+v09 <= 1; v09 = sumBool( x02, x13, x24, x35, x46, x57 )
+v10 <= 1; v10 = sumBool( x03, x14, x25, x36, x47 )
+v11 <= 1; v11 = sumBool( x04, x15, x26, x37 )
+v12 <= 1; v12 = sumBool( x05, x16, x27 )
+v13 <= 1; v13 = sumBool( x06, x17 )
+
+// Diagonal Constraints, Top-right to Bottom-left 
+
+v14 <= 1; v14 = sumBool( x67, x76 )
+v15 <= 1; v15 = sumBool( x57, x66, x75 )
+v16 <= 1; v16 = sumBool( x47, x56, x65, x74 )
+v17 <= 1; v17 = sumBool( x37, x46, x55, x64, x73 )
+v18 <= 1; v18 = sumBool( x27, x36, x45, x54, x63, x72 )
+v19 <= 1; v19 = sumBool( x17, x26, x35, x44, x53, x62, x71 )
+v20 <= 1; v20 = sumBool( x07, x16, x25, x34, x43, x52, x61, x70 )
+v21 <= 1; v21 = sumBool( x06, x15, x24, x33, x42, x51, x60 )
+v22 <= 1; v22 = sumBool( x05, x14, x23, x32, x41, x50 )
+v23 <= 1; v23 = sumBool( x04, x13, x22, x31, x40 )
+v24 <= 1; v24 = sumBool( x03, x12, x21, x30 )
+v25 <= 1; v25 = sumBool( x02, x11, x20 )
+v26 <= 1; v26 = sumBool( x01, x10 )
+</pre>

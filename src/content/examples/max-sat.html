@@ -1,0 +1,16 @@
+<p class="chunk-paragraph">
+  MaxSAT optimization problem. The goal is to maximize the number of satisfied boolean clauses.
+</p>
+
+<pre data-lang="e0">
+// (x0 || x1) && (x0 || !x1) && (!x0 || x1) && (!x0 || !x1)
+
+ x0 ||  x1 == v0
+ x0 || !x1 == v1
+!x0 ||  x1 == v2
+!x0 || !x1 == v3
+
+v = sumBool(v0, v1, v2, v3);
+
+binarySearch max v 0 4
+</pre>

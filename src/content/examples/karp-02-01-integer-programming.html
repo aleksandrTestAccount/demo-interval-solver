@@ -1,0 +1,18 @@
+<p class="chunk-paragraph">
+  Karp's 2nd NP-complete problem: 0-1 Integer Programming. Formulates a bounded knapsack matrix
+  style equation maximizing an objective weight value via conditional boolean multipliers.
+</p>
+
+<pre data-lang="e0">
+// 40*x1 + 8*x2 + 50*x3 + 16*x4 = y
+// 380*x1 + 200*x2 + 250*x3 + 800*x4 <= 1100
+// maximize y 
+
+y = (40 *? x1)  + (8 *? x2)  + (50 *? x3)  + (16 *? x4)
+
+(380 *? x1)  + (200 *? x2)  + (350 *? x3)  + (800 *? x4) <= 1100
+
+binarySearch max y 0 500
+
+size 11 0
+</pre>

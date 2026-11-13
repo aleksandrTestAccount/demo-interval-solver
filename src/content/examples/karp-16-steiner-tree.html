@@ -1,0 +1,218 @@
+<p class="chunk-paragraph">
+  Karp's 16th NP-complete problem: Steiner Tree. Finds the minimum weight subgraph that connects a
+  specific subset of required terminal vertices (<code>v1</code>, <code>v3</code>, <code>v4</code>,
+  and <code>v9</code>) across a larger network of candidate paths and optional intermediate nodes.
+</p>
+
+<pre data-lang="e0">
+//edges:
+// v1 - v2 : 1
+// v1 - v3 : 4
+// v2 - v3 : 3
+// v2 - v4 : 1
+// v2 - v5 : 2
+// v3 - v6 : 1
+// v4 - v7 : 1
+// v5 - v9 : 2
+// v6 - v9 : 4
+// v7 - v8 : 1
+// v8 - v9 : 1
+
+//terminals:
+// v1
+// v3
+// v4
+// v9
+
+k >= 0
+
+binarySearch min k 3 21
+
+v1 == true
+v3 == true
+v4 == true
+v9 == true
+
+//k = k12 + k13 + k23 + k24 + k25 + k36 + k47 + k59 + k69 + k78 + k89
+
+t1 = k12 + k13;
+t2 = k23 + k24 + k25;
+t3 = k36 + k47 + k59;
+t4 = k69 + k78 + k89;
+
+t5 = t1 + t2
+t6 = t3 + t4
+
+k = t5 + t6
+
+t1:5 == false
+t2:5 == false
+t3:5 == false
+t4:5 == false
+t1:4 == false
+t2:4 == false
+t3:4 == false
+t4:4 == false
+t1:3 == false
+t2:3 == false
+t3:3 == false
+t4:3 == false
+
+t5:5 == false
+t6:5 == false
+t5:4 == false
+t6:4 == false
+
+size 5 0
+
+e12 || e21 == et12
+e12 && e21 == false 
+et12 ? 1 : 0 = k12
+e12 ? 1 : 0 = n12
+e21 ? 1 : 0 = n21
+
+e13 || e31 == et13
+e13 && e31 == false 
+et13 ? 4 : 0 = k13
+e13 ? 1 : 0 = n13
+e31 ? 1 : 0 = n31
+
+e23 || e32 == et23
+e23 && e32 == false 
+et23 ? 3 : 0 = k23
+e23 ? 1 : 0 = n23
+e32 ? 1 : 0 = n32
+
+e24 || e42 == et24
+e24 && e42 == false 
+et24 ? 1 : 0 = k24
+e24 ? 1 : 0 = n24
+e42 ? 1 : 0 = n42
+
+e25 || e52 == et25
+e25 && e52 == false 
+et25 ? 2 : 0 = k25
+e25 ? 1 : 0 = n25
+e52 ? 1 : 0 = n52
+
+e36 || e63 == et36
+e36 && e63 == false 
+et36 ? 1 : 0 = k36
+e36 ? 1 : 0 = n36
+e63 ? 1 : 0 = n63
+
+e47 || e74 == et47
+e47 && e74 == false 
+et47 ? 1 : 0 = k47
+e47 ? 1 : 0 = n47
+e74 ? 1 : 0 = n74
+
+e59 || e95 == et59
+e59 && e95 == false 
+et59 ? 2 : 0 = k59
+e59 ? 1 : 0 = n59
+e95 ? 1 : 0 = n95
+
+e69 || e96 == et69
+e69 && e96 == false 
+et69 ? 4 : 0 = k69
+e69 ? 1 : 0 = n69
+e96 ? 1 : 0 = n96
+
+e78 || e87 == et78
+e78 && e87 == false 
+et78 ? 1 : 0 = k78
+e78 ? 1 : 0 = n78
+e87 ? 1 : 0 = n87
+
+e89 || e98 == et89
+e89 && e98 == false 
+et89 ? 1 : 0 = k89
+e89 ? 1 : 0 = n89
+e98 ? 1 : 0 = n98
+
+
+!et12 || (v1 && v2)
+!et13 || (v1 && v3)
+!et23 || (v2 && v3)
+!et24 || (v2 && v4)
+!et25 || (v2 && v5)
+!et36 || (v3 && v6)
+!et47 || (v4 && v7)
+!et59 || (v5 && v9)
+!et69 || (v6 && v9)
+!et78 || (v7 && v8)
+!et89 || (v8 && v9)
+
+//v1
+v1Index = 0 
+n12 + n13 = 1 
+
+//v2
+v2Index >= 0 
+v2Prev = v2Index - 1
+v2 ? 1 : 0 = nn2
+e12 ? v1Index = v2Prev
+e32 ? v3Index = v2Prev
+e42 ? v4Index = v2Prev
+e52 ? v5Index = v2Prev
+n12 + n32 + n42 + n52 = nn2
+
+//v3
+v3Index >= 0 
+v3Prev = v3Index - 1
+v3 ? 1 : 0 = nn3
+e13 ? v1Index = v3Prev
+e23 ? v2Index = v3Prev
+e63 ? v6Index = v3Prev
+n13 + n23 + n63 = nn3
+
+//v4
+v4Index >= 0 
+v4Prev = v4Index - 1
+v4 ? 1 : 0 = nn4
+e24 ? v2Index = v4Prev
+e74 ? v7Index = v4Prev
+n24 + n74 = nn4
+
+//v5
+v5Index >= 0 
+v5Prev = v5Index - 1
+v5 ? 1 : 0 = nn5
+e25 ? v2Index = v5Prev
+e95 ? v9Index = v5Prev
+n25 + n95 = nn5
+
+//v6
+v6Index >= 0 
+v6Prev = v6Index - 1
+v6 ? 1 : 0 = nn6
+e36 ? v3Index = v6Prev
+e96 ? v9Index = v6Prev
+n36 + n96 = nn6
+
+//v7
+v7Index >= 0 
+v7Prev = v7Index - 1
+v7 ? 1 : 0 = nn7
+e47 ? v4Index = v7Prev
+e87 ? v8Index = v7Prev
+n47 + n87 = nn7
+
+//v8
+v8Index >= 0 
+v8Prev = v8Index - 1
+v8 ? 1 : 0 = nn8
+e78 ? v7Index = v8Prev
+e98 ? v9Index = v8Prev
+n78 + n98 = nn8
+
+//v9
+v9Index >= 0 
+v9Prev = v9Index - 1
+v9 ? 1 : 0 = nn9
+e59 ? v5Index = v9Prev
+e69 ? v6Index = v9Prev
+e89 ? v8Index = v9Prev
+n59 + n69 + n89 = nn9
+</pre>

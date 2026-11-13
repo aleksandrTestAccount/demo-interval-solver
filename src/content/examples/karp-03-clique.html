@@ -1,0 +1,32 @@
+<p class="chunk-paragraph">
+  Karp's 3rd NP-complete problem: Clique. Identifies whether a graph contains a fully connected
+  subgraph of size <code>k = 4</code> by matching against an adjacency matrix and declaring missing
+  edges as false constraints.
+</p>
+
+<pre data-lang="e0">
+/* Matrix:
+0 1 1 1 0 1 0
+1 0 1 0 1 0 1
+1 1 0 1 1 0 0 
+1 0 1 0 1 1 1
+0 1 1 1 0 1 1
+1 0 0 1 1 0 1
+0 1 0 1 1 1 0
+*/
+
+// k = 4 
+4 = sumBool( v1, v2, v3, v4, v5, v6, v7 )
+
+// Each missing edge represents an additional constraint
+v1 && v5 == false
+v1 && v7 == false
+
+v2 && v4 == false
+v2 && v6 == false
+
+v3 && v6 == false
+v3 && v7 == false
+
+size 4 0
+</pre>

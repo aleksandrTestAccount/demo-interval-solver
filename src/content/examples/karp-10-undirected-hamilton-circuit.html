@@ -1,0 +1,94 @@
+<p class="chunk-paragraph">
+  Karp's 10th NP-complete problem: Undirected Hamiltonian Circuit. Models node alignment constraints
+  inside an undirected graph where double traversal paths are strictly prohibited, seeking a closed
+  loop that visits each node exactly once.
+</p>
+
+<pre data-lang="e0">
+//edges:
+// v1 - v2
+// v1 - v3
+// v1 - v4
+// v2 - v3
+// v2 - v5
+// v3 - v4
+// v4 - v5
+
+e12 && e21 == false
+e13 && e31 == false
+e14 && e41 == false
+e23 && e32 == false
+e25 && e52 == false
+e34 && e43 == false
+e45 && e54 == false
+
+v1Index = 5
+v1Prev = 4
+v1Next = 1 
+
+v2Index >= 0 
+v2Prev = v2Index - 1 
+v2Next = v2Index + 1 
+
+v3Index >= 0 
+v3Prev = v3Index - 1 
+v3Next = v3Index + 1 
+
+v4Index >= 0 
+v4Prev = v4Index - 1 
+v4Next = v4Index + 1 
+
+v5Index >= 0 
+v5Prev = v5Index - 1 
+v5Next = v5Index + 1 
+
+//v1
+e12 ? v1Next = v2Index 
+e21 ? v1Prev = v2Index 
+e13 ? v1Next = v3Index 
+e31 ? v1Prev = v3Index 
+e14 ? v1Next = v4Index 
+e41 ? v1Prev = v4Index 
+1 = sumBool( e12, e13, e14)
+1 = sumBool( e21, e31, e41)
+
+//v2
+e21 ? v2Next = v1Index 
+e12 ? v2Prev = 0 
+e23 ? v2Next = v3Index 
+e32 ? v2Prev = v3Index 
+e25 ? v2Next = v5Index 
+e52 ? v2Prev = v5Index 
+1 = sumBool( e21, e23, e25)
+1 = sumBool( e12, e32, e52)
+
+//v3
+e31 ? v3Next = v1Index 
+e13 ? v3Prev = 0 
+e32 ? v3Next = v2Index 
+e23 ? v3Prev = v2Index 
+e34 ? v3Next = v4Index 
+e43 ? v3Prev = v4Index 
+1 = sumBool( e31, e32, e34)
+1 = sumBool( e13, e23, e43)
+
+//v4
+e41 ? v4Next = v1Index 
+e14 ? v4Prev = 0 
+e43 ? v4Next = v3Index 
+e34 ? v4Prev = v3Index 
+e45 ? v4Next = v5Index 
+e54 ? v4Prev = v5Index 
+1 = sumBool( e41, e43, e45)
+1 = sumBool( e14, e34, e54)
+
+//v5
+e52 ? v5Next = v2Index 
+e25 ? v5Prev = v2Index 
+e54 ? v5Next = v4Index 
+e45 ? v5Prev = v4Index 
+1 = sumBool( e52, e54)
+1 = sumBool( e25, e45)
+
+size 3 0
+</pre>

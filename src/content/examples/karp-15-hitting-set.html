@@ -1,0 +1,31 @@
+<p class="chunk-paragraph">
+  Karp's 15th NP-complete problem: Hitting Set. Finds a subset from a global array that contains or
+  "hits" at least one distinct node choice from each configuration block list while minimizing the
+  cumulative card total <code>k</code>.
+</p>
+
+<pre data-lang="e0">
+// {v2, v3, v11}
+// {v1, v4, v5}
+// {v2, v6, v7, v8}
+// {v3, v5, v8}
+// {v3, v9, v10}
+// {v5, v6, v10}
+// {v7, v8, v9}
+// {v1, v9, v11}
+
+k = sumBool( v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11)
+
+v2 || v3 || v11
+v1 || v4 || v5
+v2 || v6 || v7 || v8
+v3 || v5 || v8
+v3 || v9 || v10
+v5 || v6 || v10
+v7 || v8 || v9
+v1 || v9 || v11
+
+binarySearch min k 0 15
+
+size 5 0
+</pre>

@@ -1,0 +1,43 @@
+<p class="chunk-paragraph">
+  Learning With Errors (LWE) cryptanalysis evaluation matrix.
+  <em
+    >Note: The native interval arithmetic engine configurations are structurally unoptimized for
+    processing modular arithmetic errors at this magnitude.</em
+  >
+</p>
+
+<pre data-lang="e0">
+/*
+//  27x1 + 13x2 + 13x3 + e1 = 30 (mod 47)
+//   1x1 + 46x2 + 23x3 + e2 = 28 (mod 47)
+//  16x1 + 13x2 + 30x3 + e3 = 25 (mod 47)
+//  18x1 + 16x2 + 19x3 + e4 = 34 (mod 47)
+//  22x1 +  0x2 +  3x3 + e5 = 32 (mod 47)
+
+// min: e1 ** 2  +  e2 ** 2  +  e3 ** 2  +  e4 ** 2  +  e5 ** 2 
+
+size 14 0
+
+m = 47
+
+x1 >= 0; x1 &lt; 16;
+x2 >= 0; x2 &lt; 16;
+x3 >= 0; x3 &lt; 16;
+
+((27 * x1) + (13 * x2) + (13 * x3) + e1) % m = 30
+(( 1 * x1) + (46 * x2) + (23 * x3) + e2) % m = 28
+((16 * x1) + (13 * x2) + (30 * x3) + e3) % m = 25
+((18 * x1) + (16 * x2) + (19 * x3) + e4) % m = 34
+((22 * x1)             + ( 3 * x3) + e5) % m = 32
+
+e1Abs = (e1 &lt; 0) ? (0 - e1) : e1;
+e2Abs = (e2 &lt; 0) ? (0 - e2) : e2;
+e3Abs = (e3 &lt; 0) ? (0 - e3) : e3;
+e4Abs = (e4 &lt; 0) ? (0 - e4) : e4;
+e5Abs = (e5 &lt; 0) ? (0 - e5) : e5;
+
+e = (e1Abs ** 2) + (e2Abs ** 2) + (e3Abs ** 2) + (e4Abs ** 2) + (e5Abs ** 2) 
+
+binarySearch min e 0 20
+*/
+</pre>

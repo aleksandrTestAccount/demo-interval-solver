@@ -1,0 +1,39 @@
+<p class="chunk-paragraph">
+  A simulation solving the Discrete Logarithm problem via standard Binary Exponentiation structures.
+  The engine checks individual bits of the exponent to perform efficient modular square-and-multiply
+  evaluations computing <code>baseˣ ≡ needle (mod m)</code>.
+</p>
+
+<pre data-lang="e0">
+// base ** x = needle (mod m)
+
+m = 241 
+base = 190 
+needle = 132
+
+x >= 0 
+x < m - 1 
+
+size + 18 0
+
+p1 = 190    // base ** 1 (mod m)
+p2 = 191    // base ** 2 (mod m)
+p3 = 90     // base ** 4 (mod m)
+p4 = 147    // base ** 8 (mod m)
+p5 = 160    // base ** 16 (mod m)
+p6 = 54     // base ** 32 (mod m)
+p7 = 24     // base ** 64 (mod m)
+p8 = 94     // base ** 128 (mod m)
+
+// binary exponentiation 
+x:0 ? p1 : 1 = v1 
+x:1 ? (v1 * p2 % m) : v1 = v2 
+x:2 ? (v2 * p3 % m) : v2 = v3 
+x:3 ? (v3 * p4 % m) : v3 = v4 
+x:4 ? (v4 * p5 % m) : v4 = v5 
+x:5 ? (v5 * p6 % m) : v5 = v6 
+x:6 ? (v6 * p7 % m) : v6 = v7 
+x:7 ? (v7 * p8 % m) : v7 = needle 
+
+format "${base} ** ${x} = ${needle} (mod ${m})"
+</pre>

@@ -1,0 +1,46 @@
+<p class="chunk-paragraph">
+  Shortest Vector Problem (SVP) in a Lattice, optimized using vector basis matrices to find the
+  minimal non-zero squared Euclidean norm length.
+</p>
+
+<pre data-lang="e0">
+// Basis vectors:
+// v0 = [  1, 1, 1 ] 
+// v1 = [ -1, 0, 2 ] 
+// v2 = [  3, 5, 6 ] 
+
+k0Abs >= 0;
+k1Abs >= 0;
+k2Abs >= 0;
+
+t0_0_t = k0Abs * 1; t0_0 = k0Pos ? t0_0_t : (0 - t0_0_t)
+t0_1_t = k1Abs * 1; t0_1 = k1Pos ? t0_1_t : (0 - t0_1_t)
+t0_2_t = k2Abs * 3; t0_2 = k2Pos ? t0_2_t : (0 - t0_2_t)
+
+t1_0_t = k0Abs * 1; t1_0 = k0Pos ? t1_0_t : (0 - t1_0_t) 
+t1_1_t = k1Abs * 0; t1_1 = k1Pos ? t1_1_t : (0 - t1_1_t)
+t1_2_t = k2Abs * 5; t1_2 = k2Pos ? t1_2_t : (0 - t1_2_t)
+
+t2_0_t = k0Abs * 1; t2_0 = k0Pos ? t2_0_t : (0 - t2_0_t)
+t2_1_t = k1Abs * 2; t2_1 = k1Pos ? t2_1_t : (0 - t2_1_t)
+t2_2_t = k2Abs * 6; t2_2 = k2Pos ? t2_2_t : (0 - t2_2_t)
+
+vr_0_t = t0_0 - t0_1 + t0_2
+vr_1_t = t1_0 + t1_1 + t1_2
+vr_2_t = t2_0 + t2_1 + t2_2 
+
+vr_0 = (vr_0_t < 0) ? (0 - vr_0_t) : vr_0_t;
+vr_1 = (vr_1_t < 0) ? (0 - vr_1_t) : vr_1_t;
+vr_2 = (vr_2_t < 0) ? (0 - vr_2_t) : vr_2_t;
+
+r = (vr_0 ** 2) + (vr_1 ** 2) + (vr_2 ** 2) 
+
+binarySearch min r 1 20
+
+size 8 0
+
+format "length ** 2 = ${r}"
+format "abs(k0) = ${k0Abs}; isPositive(k0) == ${k0Pos}"
+format "abs(k1) = ${k1Abs}; isPositive(k1) == ${k1Pos}"
+format "abs(k2) = ${k2Abs}; isPositive(k2) == ${k2Pos}"
+</pre>

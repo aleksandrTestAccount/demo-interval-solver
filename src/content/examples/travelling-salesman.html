@@ -1,0 +1,136 @@
+<p class="chunk-paragraph">
+  The Travelling Salesman Problem (TSP) optimization. It constructs a complete Hamiltonian cycle
+  covering six nodes while minimizing the combined edge traversal weight.
+</p>
+
+<pre data-lang="e0">
+//edges and weights:
+
+// v1 - v2 (1)
+// v1 - v3 (2)
+// v1 - v4 (3)
+// v2 - v3 (3)
+// v2 - v5 (2)
+// v3 - v4 (3)
+// v4 - v5 (1)
+// v1 - v6 (3)
+// v2 - v6 (2)
+// v3 - v6 (3)
+// v4 - v6 (4)
+// v5 - v6 (1)
+
+e12 && e21 == false
+e13 && e31 == false
+e14 && e41 == false
+e23 && e32 == false
+e25 && e52 == false
+e34 && e43 == false
+e45 && e54 == false
+e16 && e61 == false
+e26 && e62 == false
+e36 && e63 == false
+e46 && e64 == false
+e56 && e65 == false
+
+r = 1 *? e12  + 1 *? e21  + 2 *? e13  + 2 *? e31  + 3 *? e14  + 3 *? e41  + 3 *? e23  + 3 *? e32  + 2 *? e25  + 2 *? e52  + 3 *? e34  + 3 *? e43  + 1 *? e45  + 1 *? e54  + 3 *? e16  + 3 *? e61  + 2 *? e26  + 2 *? e62  + 3 *? e36  + 3 *? e63  + 4 *? e46  + 4 *? e64  + 1 *? e56  + 1 *? e65 
+
+size 5 0
+binarySearch min r 0 20
+//r &lt; 20
+
+v1Index = 6
+v1Prev = 5
+v1Next = 1 
+
+v2Index >= 0 
+v2Prev = v2Index - 1 
+v2Next = v2Index + 1 
+
+v3Index >= 0 
+v3Prev = v3Index - 1 
+v3Next = v3Index + 1 
+
+v4Index >= 0 
+v4Prev = v4Index - 1 
+v4Next = v4Index + 1 
+
+v5Index >= 0 
+v5Prev = v5Index - 1 
+v5Next = v5Index + 1 
+
+v6Index >= 0 
+v6Prev = v6Index - 1 
+v6Next = v6Index + 1 
+
+//v1
+e12 ? v1Next = v2Index 
+e21 ? v1Prev = v2Index 
+e13 ? v1Next = v3Index 
+e31 ? v1Prev = v3Index 
+e14 ? v1Next = v4Index 
+e41 ? v1Prev = v4Index 
+e16 ? v1Next = v6Index 
+e61 ? v1Prev = v6Index 
+1 = sumBool( e12, e13, e14, e16)
+1 = sumBool( e21, e31, e41, e61)
+
+//v2
+e21 ? v2Next = v1Index 
+e12 ? v2Prev = 0 
+e23 ? v2Next = v3Index 
+e32 ? v2Prev = v3Index 
+e25 ? v2Next = v5Index 
+e52 ? v2Prev = v5Index 
+e26 ? v2Next = v6Index 
+e62 ? v2Prev = v6Index 
+1 = sumBool( e21, e23, e25, e26)
+1 = sumBool( e12, e32, e52, e62)
+
+//v3
+e31 ? v3Next = v1Index 
+e13 ? v3Prev = 0 
+e32 ? v3Next = v2Index 
+e23 ? v3Prev = v2Index 
+e34 ? v3Next = v4Index 
+e43 ? v3Prev = v4Index 
+e36 ? v3Next = v6Index 
+e63 ? v3Prev = v6Index 
+1 = sumBool( e31, e32, e34, e36)
+1 = sumBool( e13, e23, e43, e63)
+
+//v4
+e41 ? v4Next = v1Index 
+e14 ? v4Prev = 0 
+e43 ? v4Next = v3Index 
+e34 ? v4Prev = v3Index 
+e45 ? v4Next = v5Index 
+e54 ? v4Prev = v5Index 
+e46 ? v4Next = v6Index 
+e64 ? v4Prev = v6Index 
+1 = sumBool( e41, e43, e45, e46)
+1 = sumBool( e14, e34, e54, e64)
+
+//v5
+e52 ? v5Next = v2Index 
+e25 ? v5Prev = v2Index 
+e54 ? v5Next = v4Index 
+e45 ? v5Prev = v4Index 
+e56 ? v5Next = v6Index 
+e65 ? v5Prev = v6Index 
+1 = sumBool( e52, e54, e56)
+1 = sumBool( e25, e45, e65)
+
+//v6
+e61 ? v6Next = v1Index 
+e16 ? v6Prev = 0 
+e62 ? v6Next = v2Index 
+e26 ? v6Prev = v2Index 
+e63 ? v6Next = v3Index 
+e36 ? v6Prev = v3Index 
+e64 ? v6Next = v4Index 
+e46 ? v6Prev = v4Index 
+e65 ? v6Next = v5Index 
+e56 ? v6Prev = v5Index 
+1 = sumBool( e61, e62, e63, e64, e65)
+1 = sumBool( e16, e26, e36, e46, e56)
+</pre>

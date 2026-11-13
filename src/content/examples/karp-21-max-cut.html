@@ -1,0 +1,40 @@
+<p class="chunk-paragraph">
+  Karp's 21st NP-complete problem: Maximum Cut (Max Cut). Maximizes the combined value weight of a
+  cross-boundary edge connection system by mapping complementary opposing state flags to structural
+  graph node nodes.
+</p>
+
+<pre data-lang="e0">
+//Edge:weight
+    
+//AB:3
+//AF:2
+//BC:1
+//BF:1
+//CD:2
+//CE:3
+//DE:1
+//EF:2
+
+ab ? 3 : 0 = wab
+af ? 2 : 0 = waf
+bc ? 1 : 0 = wbc
+bf ? 1 : 0 = wbf
+cd ? 2 : 0 = wcd
+ce ? 3 : 0 = wce
+de ? 1 : 0 = wde
+ef ? 2 : 0 = wef
+
+a == !b == ab
+a == !f == af
+b == !c == bc
+b == !f == bf
+c == !d == cd
+c == !e == ce
+d == !e == de
+e == !f == ef
+
+cutWeight = wab + waf + wbc + wbf + wcd + wce + wde + wef
+
+binarySearch max cutWeight 1 30
+</pre>

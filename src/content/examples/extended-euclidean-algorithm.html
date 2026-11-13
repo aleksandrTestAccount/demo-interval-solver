@@ -1,0 +1,29 @@
+<p class="chunk-paragraph">
+  The Extended Euclidean Algorithm modeled as a constraint problem. The system searches for
+  coefficients satisfying Bézout's identity (<code>a · x + b · y = GCD(a, b)</code>) by maximizing
+  the common divisor bound.
+</p>
+
+<pre data-lang="e0">
+//a*x + b*y = GCD(a,b)
+
+gcd >= 0
+
+a = 70
+b = 110
+
+binarySearch max gcd 0 110
+
+gcd * t1 = a
+gcd * t2 = b
+
+a * x = t3
+b * y = t4
+
+//t3 - t4 = gcd
+t3 - t4 = t5
+
+b1 ? t5 : (0 - t5) = gcd
+
+size 12 0
+</pre>

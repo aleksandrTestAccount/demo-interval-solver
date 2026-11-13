@@ -1,0 +1,41 @@
+<p class="chunk-paragraph">Unary operators:</p>
+
+<pre data-lang="e0">
+- n = n           // UnaryMinus
+~ n = n           // BitwiseNot
+{~} n = n         // BitwiseNotMod
+! b == b          // LogicNot
+</pre>
+
+<p class="chunk-paragraph">
+  Built-in functions (<code>[arity]</code>: <code>*</code> represents variable arity):
+</p>
+
+<pre data-lang="e0">
+abs(n) = n                 // [1] AbsRel
+bits() = n                 // [*] BitsRel
+floor(n) = n               // [1] FloorRel
+ceil(n) = n                // [1] CeilRel
+log(a) = x                 // [1] Binary log, a >= 1
+sum(2, 3, 4) = 9           // [*] SumRel
+sumBool(false, true) = 1   // [*] SumBoolRel
+clause(b,b,b,b)            // [*] ClauseRel
+negate(n) = n              // [1] NegateRel
+min(3, 2, 5) = 2           // [*] MinRel
+max(3, 2, 5) = 5           // [*] MaxRel
+if(b, n1, n2) = n3         // [3] n3 = b ? n1 : n2;
+from(n, n, n) = n          // [*] FromRel
+remRel(n, d, q, rem)       // [4] n / d = q; n % d = rem
+isInt(n) == b              // [1] IsIntRel
+betweenInc(n, n) = n       // [2] BetweenInc
+betweenExc(n, n) = n       // [2] BetweenExc
+exactlyOne(b,b,b,b)        // [*] ExactlyOneRel
+allDifferent() == b        // [*] AllDifferentRel
+rotateLeftMod(n, n) = n    // [2] BitwiseRotationLeftMod
+rotateRightMod(n, n) = n   // [2] BitwiseRotationRightMod
+bitReverse(n) = n          // [1] BitwiseReverse
+bitReverseMod(n) = n       // [1] BitwiseReverseMod
+leadingOneMask(n) = n      // [1] LeadingOneMask
+leadingOneOnly(n) = n      // [1] LeadingOneOnly
+popCount(n) = n            // [1] PopCount
+</pre>

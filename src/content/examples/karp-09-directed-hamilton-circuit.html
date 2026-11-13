@@ -1,0 +1,93 @@
+<p class="chunk-paragraph">
+  Karp's 9th NP-complete problem: Directed Hamiltonian Circuit. Solves the sequence mapping
+  constraints required to traverse every single vertex exactly once in a directional graph matrix
+  before returning to the origin index point.
+</p>
+
+<pre data-lang="e0">
+//directed graph, edges:
+
+//v1 -> v2
+//v1 -> v3
+//v1 -> v4 
+//v2 -> v1
+//v3 -> v1 
+//v3 -> v2 
+//v4 -> v3
+//v4 -> v5
+//v5 -> v2 
+//v5 -> v3
+//v5 -> v4 
+
+size 3 0
+
+v1Index = 5
+v2Index >= 0
+v3Index >= 0
+v4Index >= 0
+v5Index >= 0
+
+v1Prev = 4
+v2Prev = v2Index - 1
+v3Prev = v3Index - 1
+v4Prev = v4Index - 1
+v5Prev = v5Index - 1
+
+v1Next = 1
+v2Next = v2Index + 1
+v3Next = v3Index + 1
+v4Next = v4Index + 1
+v5Next = v5Index + 1
+
+//v1
+1 = sumBool( e12,  e13,  e14 )
+1 = sumBool( e21, e31 )
+
+e12 ? v1Next = v2Index
+e13 ? v1Next = v3Index
+e14 ? v1Next = v4Index
+
+e21 ? v1Prev = v2Index
+e31 ? v1Prev = v3Index
+
+//v2
+1 = sumBool( e21 )
+1 = sumBool( e12, e32, e52)
+
+e21 ? v2Next = v1Index
+
+e12 ? v2Prev = 0
+e32 ? v2Prev = v3Index
+e52 ? v2Prev = v5Index
+
+//v3
+1 = sumBool( e31, e32 )
+1 = sumBool( e13, e43, e53 )
+
+e31 ? v3Next = v1Index
+e32 ? v3Next = v2Index
+
+e13 ? v3Prev = 0
+e43 ? v3Prev = v4Index
+e53 ? v3Prev = v5Index
+
+//v4
+1 = sumBool( e43,  e45 )
+1 = sumBool( e14, e54)
+
+e43 ? v4Next = v3Index
+e45 ? v4Next = v5Index
+
+e14 ? v4Prev = 0
+e54 ? v4Prev = v5Index
+
+//v5
+1 = sumBool( e52, e53, e54 )
+1 = sumBool( e45)
+
+e52 ? v5Next = v2Index
+e53 ? v5Next = v3Index
+e54 ? v5Next = v4Index
+
+e45 ? v5Prev = v4Index
+</pre>

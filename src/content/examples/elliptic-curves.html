@@ -1,0 +1,140 @@
+<p class="chunk-paragraph">
+  Point multiplication algebra on Elliptic Curves over finite fields.
+  <em
+    >Note: The native interval arithmetic solver strategy is highly unoptimized for processing the
+    dense step-by-step modular inversions required by these coordinate additions.</em
+  >
+</p>
+
+<pre data-lang="e0">
+/*
+    y ** 2 = x ** 3 + a * x + b
+    a = 1
+    b = 1
+
+    points addition; p1 != p2; p1 + p2 = p3:    
+
+    l = (p2_y - p1_y) / (p2_x - p1_x) (mod m)
+    p3_x = l ** 2 - p1_x - p2_x (mod m)
+    p3_y = l * (p1_x - p3_x) - p1_y (mod m)
+    
+    y ** 2 = x ** 3 + x + 1 (mod 23)
+
+    k * basePoint = needlePoint; period = 28;    
+*/
+/*
+size 10
+
+m = 23 
+period = 28
+
+base_x = 0
+base_y = 1
+
+needle_x = 11
+needle_y = 20
+
+needle_next_x = 7
+needle_next_y = 12
+
+k >= 0 
+k < period
+
+// 1 * base 
+p1_x = 0
+p1_y = 1
+
+// 2 * base 
+p2_x = 6
+p2_y = 19
+
+// 4 * base 
+p3_x = 13
+p3_y = 16
+
+// 8 * base 
+p4_x = 5
+p4_y = 19
+
+// 16 * base 
+p5_x = 17
+p5_y = 3
+
+// 3 * base
+pk3_x = 3
+pk3_y = 13
+
+// 0
+k:0 == true
+v1_x = base_x
+v1_y = base_y
+
+// 1
+k:1 ? pk3_x : v1_x = v2_x
+k:1 ? pk3_y : v1_y = v2_y
+
+// 2, if ( k:2 ) { v3 = v2 + p3 } else { v3 = v2 }
+
+l2_num_t = p3_y - v2_y 
+(l2_num_t < 0) ? (l2_num_t + m) : l2_num_t = l2_num 
+
+l2_den_t = p3_x - v2_x
+(l2_den_t < 0) ? (l2_den_t + m) : l2_den_t = l2_den
+
+l2 * l2_den % m = l2_num
+
+t2_x = (l2 ** 2 - v2_x - p3_x + (m << 1)) % m 
+t2_t = v2_x - t2_x
+(t2_t < 0) ? (t2_t + m) : t2_t = t2_tt 
+t2_y = (l2 * t2_tt - v2_y + m) % m
+
+k:2 ? t2_x : v2_x = v3_x 
+k:2 ? t2_y : v2_y = v3_y
+
+// 3, if ( k:3 ) { v4 = v3 + p4 } else { v4 = v3 }
+
+l3_num_t = p4_y - v3_y 
+(l3_num_t < 0) ? (l3_num_t + m) : l3_num_t = l3_num 
+
+l3_den_t = p4_x - v3_x
+(l3_den_t < 0) ? (l3_den_t + m) : l3_den_t = l3_den
+
+l3 * l3_den % m = l3_num
+
+t3_x = (l3 ** 2 - v3_x - p4_x + (m << 1)) % m 
+t3_t = v3_x - t3_x
+(t3_t < 0) ? (t3_t + m) : t3_t = t3_tt 
+t3_y = (l3 * t3_tt - v3_y + m) % m
+
+k:3 ? t3_x : v3_x = v4_x 
+k:3 ? t3_y : v3_y = v4_y
+
+// 4, if ( k:4 ) { needle = v4 + p5 } else { needle = v3 }
+
+l4_num_t = p5_y - v4_y 
+(l4_num_t < 0) ? (l4_num_t + m) : l4_num_t = l4_num 
+
+l4_den_t = p5_x - v4_x
+(l4_den_t < 0) ? (l4_den_t + m) : l4_den_t = l4_den
+
+l4 * l4_den % m = l4_num
+
+t4_x = (l4 ** 2 - v4_x - p5_x + (m << 1)) % m 
+t4_t = v4_x - t4_x
+(t4_t < 0) ? (t4_t + m) : t4_t = t4_tt 
+t4_y = (l4 * t4_tt - v4_y + m) % m
+
+k:4 ? t4_x : v4_x = v5_x 
+k:4 ? t4_y : v4_y = v5_y
+
+// result
+
+isOdd ? needle_x : needle_next_x = v5_x
+isOdd ? needle_y : needle_next_y = v5_y
+
+k_result = (k >> 1) <<* 1;
+k_result:0 == isOdd
+
+format "${k_result} * (${base_x}, ${base_y}) = (${needle_x}, ${needle_y})"
+*/
+</pre>

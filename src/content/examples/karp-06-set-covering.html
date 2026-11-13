@@ -1,0 +1,28 @@
+<p class="chunk-paragraph">
+  Karp's 6th NP-complete problem: Set Covering. Finds the minimum number of subsets required to
+  cover every element in the universal set <code>u</code>, by declaring constraints for the presence
+  of each element across candidate subsets.
+</p>
+
+<pre data-lang="e0">
+//u = {1,2,3,4,5,6}
+
+//a = {1,2,3}
+//b = {2,3,4}
+//c = {3,4,5}
+//d = {4,5,6}
+//e = {1,5,6}
+
+a || e      //element 1 in [a, e]
+a || b      //element 2 in [a,b]
+a || b || c //element 3 in [a,b,c]
+b || c || d //element 4 in [b,c,d]
+c || d || e //element 5 in [c, d, e]
+d || e      //element 6 in [d, e]
+
+binarySearch min k 0 5
+
+k = sumBool( a, b, c, d, e )
+
+size 3 0
+</pre>

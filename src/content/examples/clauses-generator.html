@@ -1,0 +1,58 @@
+<p class="chunk-paragraph">
+  An automated clause generator design modeled for a full 3-2 hardware binary adder circuit. Out of
+  a complete setup, the engine solves for the remaining 6 undetermined logic paths to preserve adder
+  completeness.
+</p>
+
+<pre data-lang="e0">
+// a b c - inputs,
+// t - additional variable t = a xor b,
+// r0 and r1 - result bits
+
+// for example, 0b01 + 0b00 + 0b01 = 0b10
+// a = 1, b = 0, c = 1: t = 1, r0 = 0, r1 = 1
+
+// let's find 10 clauses for this adder 
+
+/* 4 non-excludable clauses: 
+a b !t
+!a !b !t
+t c !r0
+t !c r0 
+*/
+
+// Let's find the remaining 6 clauses
+// na: !a 
+// a_b_nr1: clause a b !r1
+ 
+a_b_nr1 || a_t_nr1 || a_c_nr1 || b_t_nr1 || b_c_nr1
+a_b_nr1 || a_t_nr1 || a_nr1_nr0 || b_t_nr1 || b_nr1_nr0
+a_nb_t || nb_t_r1 || nb_r1_r0
+a_nb_t || a_t_nr1 || a_c_nr1
+a_nb_t || nb_t_r1 || nb_nc_r1
+a_nb_t || a_t_nr1 || a_nr1_nr0
+nb_r1_r0 || nt_c_r0 || nt_r1_r0
+a_c_nr1 || nt_c_nr1 || nt_c_r0
+a_c_nr1 || a_nr1_nr0 || nt_c_nr1 || nt_nr1_nr0 || c_nr1_nr0
+nb_nc_r1 || nb_r1_r0 || nt_nc_r1 || nt_r1_r0 || nc_r1_r0
+nb_nc_r1 || nt_nc_r1 || nt_nc_nr0
+a_nr1_nr0 || nt_nc_nr0 || nt_nr1_nr0
+na_b_t || na_t_r1 || na_r1_r0
+na_b_t || b_t_nr1 || b_c_nr1
+na_b_t || na_t_r1 || na_nc_r1
+na_b_t || b_t_nr1 || b_nr1_nr0
+na_r1_r0 || nt_c_r0 || nt_r1_r0
+b_c_nr1 || nt_c_nr1 || nt_c_r0
+b_c_nr1 || b_nr1_nr0 || nt_c_nr1 || nt_nr1_nr0 || c_nr1_nr0
+na_nc_r1 || na_r1_r0 || nt_nc_r1 || nt_r1_r0 || nc_r1_r0
+na_nc_r1 || nt_nc_r1 || nt_nc_nr0
+b_nr1_nr0 || nt_nc_nr0 || nt_nr1_nr0
+na_nb_r1 || na_t_r1 || na_r1_r0 || nb_t_r1 || nb_r1_r0
+na_nb_r1 || na_t_r1 || na_nc_r1 || nb_t_r1 || nb_nc_r1
+
+k = sumBool( a_b_nr1,  a_t_nr1,  a_c_nr1,  b_t_nr1,  b_c_nr1,  a_nr1_nr0 , b_nr1_nr0,  a_nb_t,  nb_t_r1,  nb_r1_r0,  nb_nc_r1,  nt_c_r0,  nt_r1_r0,  nt_c_nr1,  nt_nr1_nr0,  c_nr1_nr0,  nt_nc_r1,  nc_r1_r0,  nt_nc_nr0,  na_b_t,  na_t_r1,  na_r1_r0,  na_nc_r1,  na_nb_r1 )
+
+size 5 0 
+
+k = 6
+</pre>

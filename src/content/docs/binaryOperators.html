@@ -1,0 +1,57 @@
+<p class="chunk-paragraph">
+  Supported binary operators listed with their signature and precedence:
+</p>
+
+<pre data-lang="e0">
+b ? n = n         // 99999   condition, if left is true, then right = result
+n : n == b        // 99999   get bit
+
+n ** n = n        // 1013    exponentiation
+n {**} n = n      // 1013    mod exponentiation
+
+n / n = n         // 1012    division
+n * n = n         // 1012    multiplication
+n % n = n         // 1012    remainder
+n {*} n = n       // 1012    mod multiplication
+n *? b = n        // 1012    multiplication by boolean
+
+n + n = n         // 1011    addition
+n - n = n         // 1011    subtraction
+n {+} n = n       // 1011    mod addition
+n {-} n = n       // 1011    mod subtraction
+
+n <<* n = n       // 900     ShiftLeftOpenRel
+n *>> n = n       // 900     ShiftRightOpenRel
+n {<<*} n = n     // 900     ShiftLeftOpenModRel
+n {*>>} n = n     // 900     ShiftRightOpenModRel
+n >>> n = n       // 900     ShiftRightUnsignedRel
+n >> n = n        // 900     ShiftRightSignedRel
+n << n = n        // 900     ShiftLeftRel
+n {<<} n = n      // 900     ShiftLeftModRel
+n {>>>} n = n     // 900     ShiftRightUnsignedModRel
+
+n & n = n         // 107     BitwiseAnd
+n {&} n = n       // 107     BitwiseAndMod
+
+n ^ n = n         // 106     BitwiseXor
+n {^} n = n       // 106     BitwiseXorMod
+
+n | n = n         // 105     BitwiseOr
+n {|} n = n       // 105     BitwiseOrMod
+
+n > n == b        // 9       GreaterThan
+n >= n == b       // 9       GreaterThanOrEqual
+n < n == b        // 9       LessThan
+n <= n == b       // 9       LessThanOrEqual
+
+n = n == b        // 8       Equal
+n != n == b       // 8       NotEqual
+
+b && b == b       // 5       LogicAnd
+
+b || b == b       // 4       LogicOr
+
+b !== b == b      // 3       LogicXor
+
+b == b == b       // 2       LogicXnor
+</pre>

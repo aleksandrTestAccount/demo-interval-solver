@@ -1,0 +1,63 @@
+<p class="chunk-paragraph">
+  The Job Shop Scheduling problem modeled using linear bounds and binary choice selectors. Tasks
+  must execute on fixed machinery in a sequential timeline while minimizing the global completion
+  time span (makespan).
+</p>
+
+<pre data-lang="e0">
+size + 5 0
+
+// j1 - job1
+// j2_t2 = job2 task2
+// (m0 3) - task on machine0 in 3 units of time
+
+// j0: (m0 4) (m1 2) (m2 2)
+// j1: (m0 2) (m2 1) (m1 5)
+// j2: (m1 5) (m2 2)
+
+binarySearch min k 0 20
+
+k >= j0_end; b1 ? k = j0_end
+k >= j1_end; b2 ? k = j1_end
+k >= j2_end; b3 ? k = j2_end
+
+b1 || b2 || b3
+
+j0_t0_start + 4 = j0_t0_end; j0_t1_start >= j0_t0_end
+j0_t1_start + 2 = j0_t1_end; j0_t2_start >= j0_t1_end
+j0_t2_start + 2 = j0_t2_end; j0_end = j0_t2_end
+
+j1_t0_start + 2 = j1_t0_end; j1_t1_start >= j1_t0_end;
+j1_t1_start + 1 = j1_t1_end; j1_t2_start >= j1_t1_end;
+j1_t2_start + 5 = j1_t2_end; j1_end = j1_t2_end
+
+j2_t0_start + 5 = j2_t0_end; j2_t1_start >= j2_t0_end;
+j2_t1_start + 2 = j2_t1_end; j2_end = j2_t1_end
+
+//m0: j0_t0, j1_t0
+
+j0_t0_before_j1_t0 == j0_t0_end <= j1_t0_start
+!j0_t0_before_j1_t0 == j0_t0_start >= j1_t0_end
+
+//m1: j0_t1, j1_t2, j2_t0
+
+j0_t1_before_j1_t2 == j0_t1_end <= j1_t2_start
+!j0_t1_before_j1_t2 == j0_t1_start >= j1_t2_end
+
+j0_t1_before_j2_t0 == j0_t1_end <= j2_t0_start
+!j0_t1_before_j2_t0 == j0_t1_start >= j2_t0_end
+
+j1_t2_before_j2_t0 == j1_t2_end <= j2_t0_start
+!j1_t2_before_j2_t0 == j1_t2_start >= j2_t0_end
+
+//m2: j0_t2, j1_t1, j2_t1
+
+j0_t2_before_j1_t1 == j0_t2_end <= j1_t1_start
+!j0_t2_before_j1_t1 == j0_t2_start >= j1_t1_end
+
+j0_t2_before_j2_t1 == j0_t2_end <= j2_t1_start
+!j0_t2_before_j2_t1 == j0_t2_start >= j2_t1_end
+
+j1_t1_before_j2_t1 == j1_t1_end <= j2_t1_start
+!j1_t1_before_j2_t1 == j1_t1_start >= j2_t1_end
+</pre>

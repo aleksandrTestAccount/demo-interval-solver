@@ -1,0 +1,51 @@
+<p class="chunk-paragraph">
+  Karp's 19th NP-complete problem: Job Sequencing. Optimizes a linear job order containing varied
+  run cycles, timelines, and penalties by running binary selectors to evaluate scheduling conflicts
+  while minimizing global penalty values.
+</p>
+
+<pre data-lang="e0">
+/*
+taskName: execution time, deadline, penalty
+
+t1: 4, 3, 1
+t2: 3, 2, 2
+t3: 1, 4, 3
+t4: 2, 7, 1
+t5: 3, 4, 4
+*/
+
+k = 1 *? isPenalty1 + 2 *? isPenalty2 + 3 *? isPenalty3 + 1 *? isPenalty4 + 4 *? isPenalty5
+
+binarySearch min k 0 10
+
+isPenalty1 == end1 > 3
+isPenalty2 == end2 > 2
+isPenalty3 == end3 > 4
+isPenalty4 == end4 > 7
+isPenalty5 == end5 > 4
+
+size + 5 0
+
+start1 + 4 = end1
+start2 + 3 = end2
+start3 + 1 = end3
+start4 + 2 = end4
+start5 + 3 = end5
+
+// b12 : t1 before t2
+
+end1 <= start2 == b12; end2 <= start1 == !b12;
+end1 <= start3 == b13; end3 <= start1 == !b13;
+end1 <= start4 == b14; end4 <= start1 == !b14;
+end1 <= start5 == b15; end5 <= start1 == !b15;
+
+end2 <= start3 == b23; end3 <= start2 == !b23;
+end2 <= start4 == b24; end4 <= start2 == !b24;
+end2 <= start5 == b25; end5 <= start2 == !b25;
+
+end3 <= start4 == b34; end4 <= start3 == !b34;
+end3 <= start5 == b35; end5 <= start3 == !b35;
+
+end4 <= start5 == b45; end5 <= start4 == !b45;
+</pre>

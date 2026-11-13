@@ -1,0 +1,45 @@
+<p class="chunk-paragraph">
+  Karp's 14th NP-complete problem: Exact Cover. Solves for a selection of collection subsets such
+  that each separate distinct element from the universal set <code>X</code> is contained in exactly
+  one chosen subset, matching set intersection collisions directly to false configurations.
+</p>
+
+<pre data-lang="e0">
+// X: {1,2,3,4,5,6,7}
+
+// A: {1,4,7}
+// B: {1,4}
+// C: {4,5,7}
+// D: {3,5,6}
+// E: {2,3,6,7}
+// F: {2,7}
+
+k = sumBool( a, b, c, d, e, f)
+
+// intersection of sets
+a && b == false
+a && c == false
+a && e == false
+a && f == false
+
+b && c == false
+
+c && d == false
+c && e == false
+c && f == false
+
+d && e == false
+
+e && f == false
+
+// elements
+a || b           //1
+e || f           //2
+d || e           //3
+a || b || c      //4
+c || d || c      //5
+d || e           //6
+a || c || e || f //7
+
+binarySearch min k 0 6
+</pre>

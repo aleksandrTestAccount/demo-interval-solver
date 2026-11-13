@@ -1,0 +1,21 @@
+<p class="chunk-paragraph">
+  Karp's 1st NP-complete problem: Boolean Satisfiability (SAT). Demonstrates alternative inline
+  notations for setting up standard conjunctive multi-variable boolean clauses that the engine must
+  evaluate to TRUE.
+</p>
+
+<pre data-lang="e0">
+(x1 || !x2 || x3) && (!x1 || x3 || x4 || x5) && (x3) == true
+
+// or 
+
+x1 || !x2 || x3 == true
+!x1 || x3 || x4 || x5 == true
+x3 == true
+
+// or 
+
+x1 || !x2 || x3
+!x1 || x3 || x4 || x5
+x3
+</pre>

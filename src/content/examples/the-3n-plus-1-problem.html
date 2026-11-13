@@ -1,0 +1,28 @@
+<p class="chunk-paragraph">
+  A constraint satisfaction analysis mapping 5 discrete execution steps of the Collatz (3n + 1)
+  conjecture logic framework.
+</p>
+
+<pre data-lang="e0">
+// 5 steps
+
+start:0 == true // start is odd 
+
+n1 = (start + (start &lt;&lt; 1) + 1) >> 1
+
+v2 = (n1 + (n1 &lt;&lt; 1) + 1) >> 1
+n1:0 ? v2 : (n1 >> 1) = n2
+
+v3 = (n2 + (n2 &lt;&lt; 1) + 1) >> 1
+n2:0 ? v3 : (n2 >> 1) = n3
+
+v4 = (n3 + (n3 &lt;&lt; 1) + 1) >> 1
+n3:0 ? v4 : (n3 >> 1) = n4
+
+v5 = (n4 + (n4 &lt;&lt; 1) + 1) >> 1
+n4:0 ? v5 : (n4 >> 1) = n5
+
+n5 > 4
+
+size 10
+</pre>

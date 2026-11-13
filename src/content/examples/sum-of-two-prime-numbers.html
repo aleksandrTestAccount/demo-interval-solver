@@ -1,0 +1,61 @@
+<p class="chunk-paragraph">
+  An implementation demonstrating Goldbach's conjecture by partitioning an even number into the sum
+  of two primes (<code>n = prime1 + prime2</code>). The solver utilizes a single-iteration Fermat
+  primality test framework (base 2) to evaluate both variables.
+</p>
+
+<pre data-lang="e0">
+// Fermat's test will be used, performing only one iteration per number (base 2). 
+// One iteration is not enough, but sufficient for demonstration purposes.
+
+// n = prime1 + prime2 
+// n = 60
+
+size + 12 0
+
+prime1 > 1
+prime2 > 1
+
+60 = prime1 + prime2
+
+// test prime1, base = 2
+
+prime1:0 == true
+prime1 >> 1 = prime1_half
+(prime1 >> 1) << 1 = prime1_oneLess
+
+prime1_p1 = 2 
+prime1_p2 = 4 
+prime1_p3 = 16 
+prime1_p4 = 256 % prime1
+prime1_p5 = prime1_p4 * prime1_p4 % prime1
+
+prime1_half:0 ? prime1_p1 : 1 = prime1_v1  
+prime1_half:1 ? (prime1_v1 * prime1_p2 % prime1) : prime1_v1 = prime1_v2  
+prime1_half:2 ? (prime1_v2 * prime1_p3 % prime1) : prime1_v2 = prime1_v3  
+prime1_half:3 ? (prime1_v3 * prime1_p4 % prime1) : prime1_v3 = prime1_v4  
+prime1_half:4 ? (prime1_v4 * prime1_p5 % prime1) : prime1_v4 = prime1_v5  
+
+prime1_b ? 1 : prime1_oneLess = prime1_v5
+
+
+// test prime2, base = 2
+
+prime2:0 == true
+prime2 >> 1 = prime2_half
+(prime2 >> 1) << 1 = prime2_oneLess
+
+prime2_p1 = 2 
+prime2_p2 = 4 
+prime2_p3 = 16 
+prime2_p4 = 256 % prime2
+prime2_p5 = prime2_p4 * prime2_p4 % prime2
+
+prime2_half:0 ? prime2_p1 : 1 = prime2_v1  
+prime2_half:1 ? (prime2_v1 * prime2_p2 % prime2) : prime2_v1 = prime2_v2  
+prime2_half:2 ? (prime2_v2 * prime2_p3 % prime2) : prime2_v2 = prime2_v3  
+prime2_half:3 ? (prime2_v3 * prime2_p4 % prime2) : prime2_v3 = prime2_v4  
+prime2_half:4 ? (prime2_v4 * prime2_p5 % prime2) : prime2_v4 = prime2_v5  
+
+prime2_b ? 1 : prime2_oneLess = prime2_v5
+</pre>

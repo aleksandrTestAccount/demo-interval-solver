@@ -1,0 +1,31 @@
+<p class="chunk-paragraph">
+  The conditional construct works exclusively with numbers, and the conditional expression itself
+  must evaluate to a boolean type.
+</p>
+
+<p class="chunk-paragraph">Simple conditional equations look like this:</p>
+
+<pre data-lang="e0">
+b ? n1 : n2 = r 
+r = b ? n1 : n2
+</pre>
+
+<p class="chunk-paragraph">
+  Parentheses are strictly required for nesting or grouping complex expressions inside a conditional
+  construct:
+</p>
+
+<pre data-lang="e0">
+(x * x) = (b1 || b2) ? (a + v) : v
+</pre>
+
+<p class="chunk-paragraph">
+  Please note that the <code>?</code> and <code>:</code> tokens are heavily overloaded depending on
+  the context, so use parentheses to avoid ambiguity:
+</p>
+
+<pre data-lang="e0">
+// Conditional construct: b ? x : v 
+// Bit extraction: x : n
+// Implication-like operation: b ? x
+</pre>

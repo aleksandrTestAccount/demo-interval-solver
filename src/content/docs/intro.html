@@ -1,0 +1,46 @@
+<p class="chunk-paragraph">
+  Enter an equation in the editor, for example <code>x + x = 4</code>, then press the "Solve"
+  button. You must specify the number of bits allocated for each number, e.g., for an 8-bit number:
+  <code>size 8 0</code>.
+</p>
+
+<p class="chunk-paragraph">
+  For calculations involving fractions, specify both the number of fractional and integer bits:
+</p>
+
+<pre data-lang="e0">
+size 5 1; x + x = 7;
+</pre>
+
+<p class="chunk-paragraph">
+  If you encounter the error message "Invalid number", try to increase the number of bits:
+</p>
+
+<pre data-lang="e0">
+size 11 0; x + x = 1024
+</pre>
+
+<p class="chunk-paragraph">
+  Adding a '+' to 'size' ensures that all calculated values will be non-negative:
+</p>
+
+<pre data-lang="e0">
+size + 8 0
+</pre>
+
+<p class="chunk-paragraph">
+  This solver is based on interval arithmetic combined with a simple backtracking search for boolean
+  variables. It is generally slow and performs even worse with modular arithmetic and bitwise
+  operations. This project was created exclusively for educational purposes.
+</p>
+
+<p class="chunk-paragraph">
+  E0 has no standard loops (like <code>for</code> or <code>while</code>) or classic imperative
+  branching. Instead of step-by-step instructions, you describe the problem using declarative
+  equations and constraints.
+</p>
+
+<p class="chunk-paragraph">
+  A template-style preprocessor is planned for upcoming releases. It will automate repetitive
+  patterns and generate boilerplate constraints dynamically at compile time.
+</p>
