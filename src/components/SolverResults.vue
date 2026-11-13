@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data" class="solver-card animate-fade">
+  <div v-if="data" id="results" class="solver-card animate-fade">
     <div class="card-top-bar" :class="{ 'is-collapsed': !isExpanded }">
       <span class="bar-label"></span>
 
@@ -265,7 +265,7 @@ defineExpose({ setExpanded })
 
 /* Standard results body */
 .results-body {
-  padding: 0 0 20px;
+  padding: 10px 0 20px;
   display: flex;
   flex-direction: column;
   gap: 14px;

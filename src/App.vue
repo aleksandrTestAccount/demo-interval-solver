@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import HeroHeader from './components/HeroHeader.vue'
 import MainNavbar from './components/MainNavbar.vue'
 import CodeEditor from './components/CodeEditor.vue'
@@ -48,8 +48,17 @@ const currentChunks = computed(() => {
   return PAGE_CONTENT_MAP[currentPage.value] || PAGE_CONTENT_MAP[DEFAULT_PAGE_ID]
 })
 
-const handleSolverResult = (result) => {
-  solverData.value = result
+async function handleSolverResult(result) {
+  solverData.value = result 
+  
+  await nextTick()
+
+  setTimeout(() => {
+    const resultsElement = document.getElementById('results')
+    if (resultsElement) {
+      resultsElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }
+  }, 100)
 }
 
 function handleCopyCode(newCode) {
