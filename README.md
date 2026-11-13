@@ -2,7 +2,7 @@
 
 > **О проекте:** Этот репозиторий создан как демонстрационный пет-проект для технических собеседований. На протяжении всей карьеры я работал исключительно над закрытыми коммерческими продуктами, поэтому у меня не было публичного кода, который можно было бы открыто показать на GitHub.
 
-**Демо:** [aleksandrtestaccount.github.io/demo](https://aleksandrtestaccount.github.io/demo/)
+**Демо:** [aleksandrtestaccount.github.io/demo](https://aleksandrtestaccount.github.io/demo-interval-solver/)
 
 В проекте используются Vue 3 (Composition API), сборщик Vite и Web Workers. Для подсветки синтаксиса применяется пакет `shiki`.
 
